@@ -1,0 +1,12 @@
+# run with `docker-compose up -d`
+# to unmount volume and reinitialize schema/data, run with `docker-compose down -v`
+version: '3.5'
+
+services:
+    hebhisto:
+        image: gcc:4.9
+        working_dir: /app
+        volumes:
+            - .:/app
+        container_name: heb-coding-challenge
+        command: ./start-app
