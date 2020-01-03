@@ -1,5 +1,5 @@
 CFLAGS = gcc -g
-OBJ = wordcountfreq.o
+OBJ = histogram.o
 
 # Automatic substitution using suffix rules to
 # make .o files from either .c or .cpp files
@@ -12,10 +12,10 @@ OBJ = wordcountfreq.o
 # Build program based on the required .o files
 
 wordcount: ${OBJ}
-	${CFLAGS} -o wordcountfreq ${OBJ}
+	${CFLAGS} -o histogram ${OBJ}
 
 
 clean:
 	rm ${OBJ}
-	rm wordcountfreq
+	rm histogram
 
