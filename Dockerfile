@@ -1,5 +1,5 @@
 FROM gcc:4.9
-WORKDIR /myapp
+WORKDIR /app
 COPY . .
-RUN gcc -o myapp wordcountfreq.c
-CMD ["./myapp", "pangrams1.txt"]
+RUN gcc -o histogram histogram.c
+CMD ["./histogram", "input_files/pangrams1.txt"]

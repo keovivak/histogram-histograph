@@ -1,5 +1,0 @@
-#!/bin/sh
-
-
-make
-./app pangrams1.txt

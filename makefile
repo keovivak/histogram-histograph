@@ -11,7 +11,7 @@ OBJ = histogram.o
 
 # Build program based on the required .o files
 
-wordcount: ${OBJ}
+app: ${OBJ}
 	${CFLAGS} -o histogram ${OBJ}
 
 
