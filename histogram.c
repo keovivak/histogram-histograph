@@ -63,6 +63,10 @@ void countWordsInFile(char fileName[]) {
     // Parses files to for spaces/tabs/newlines
     while ((fgets(buffer, BUFSIZ, fileToRead)) != NULL) {
 	int lenOfString = strlen(buffer);
+        int i;
+        for (i = 0; i<lenOfString; i++) {
+            buffer[i] = tolower(buffer[i]);
+        }
 	getWordFromLine(buffer, lenOfString);
     }
 
@@ -100,7 +104,12 @@ void validWord(char word[], int lengthOfWord) {
     if (word[0] == '\0') {
 	return;
     } else {
-	//printf("word is %s, with a length of %d\n", word, lengthOfWord);
+	printf("word is |%s| with a length of %d\n", word, lengthOfWord);
+        if (word[lengthOfWord-1] == ','
+                || word[lengthOfWord-1] == '.') {
+            printf("contains this\n");
+            word[lengthOfWord-1] = '\0';
+        }
 	wordCount += 1;
     }
 
