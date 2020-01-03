@@ -1,5 +1,5 @@
 #!/bin/sh
 
 
-make -C /src
-src/app pangrams1.txt
+make
+./app pangrams1.txt
