@@ -28,6 +28,7 @@ void validWord(char word[], int lengthOfWord);
 int checkWordLL(char word[]);
 void insertIntoLL(char word[], int lengthOfWord);
 void printLL();
+void sortLL();
 
 
 struct wordFreq *HEAD = NULL;
@@ -107,7 +108,6 @@ void validWord(char word[], int lengthOfWord) {
 	printf("word is |%s| with a length of %d\n", word, lengthOfWord);
         if (word[lengthOfWord-1] == ','
                 || word[lengthOfWord-1] == '.') {
-            printf("contains this\n");
             word[lengthOfWord-1] = '\0';
         }
 	wordCount += 1;
@@ -186,6 +186,31 @@ void printLL() {
     while (traverse != NULL) {
 	printf("'%s' appears %d times\n", traverse->word, traverse->freq);
 	traverse = traverse->next;
+    }
+}
+
+void sortLL() {
+    struct wordFreq *current;
+    struct wordFreq *index = NULL;
+
+    char *tmpWord;
+    int tmpValue;
+
+    current = HEAD->next;
+    if (current == NULL) {
+        return;
+    } else {
+        while (current != NULL) {
+            index = current->next;
+
+            while (index != NULL) {
+                if (cmp) {
+                    //
+                }
+                index = index->next;
+            }
+            current = current->next;
+        }
     }
 }
 
