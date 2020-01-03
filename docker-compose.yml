@@ -4,9 +4,12 @@ version: '3.5'
 
 services:
     hebhisto:
-        image: gcc:4.9
+        image: gcc
         working_dir: /app
         volumes:
             - .:/app
         container_name: heb-coding-challenge
-        command: ./start-app
+        command: sh -c "
+            make &&
+            ./histogram input_files/pangrams1.txt &&
+            make clean"
