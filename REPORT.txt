@@ -1,5 +1,0 @@
-A) Completed
-B) Uses a Link List to keep track of words, each node has the word and freq it appears each word gets sorted on insert. Currently if two words are the same but have capital letters on the first letter, it will be separate. Capitals come before lower cases so they will be at the beginning of the list
-C) run make command to compile
-	./wordcountfreq <filename>
-E) no improvement needed
