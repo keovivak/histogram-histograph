@@ -15,10 +15,10 @@ Assignment 1 Independent Study Recitation extension
 
 
 struct wordFreq {
-	char *word;
-	int freq;
-	struct wordFreq *next;
-	struct wordFreq *prev;
+    char *word;
+    int freq;
+    struct wordFreq *next;
+    struct wordFreq *prev;
 };
 
 

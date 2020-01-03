@@ -3,4 +3,4 @@ WORKDIR /app
 COPY . .
 #RUN gcc -o histogram histogram.c
 RUN make
-CMD ["./histogram", "input_files/pangrams1.txt"]
+CMD ["./histogram", "input_files/input.txt"]
