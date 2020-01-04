@@ -11,5 +11,5 @@ services:
         container_name: heb-coding-challenge
         command: sh -c "
             make &&
-            ./histogram input_files/input.txt &&
+            ./histogram input_files/pangrams1.txt &&
             make clean"

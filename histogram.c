@@ -27,11 +27,13 @@ void validWord(char word[], int lengthOfWord);
 int checkWordLL(char word[]);
 void insertIntoLL(char word[], int lengthOfWord);
 void printLL();
+void printOccurence(int occurence);
 void sortLL();
 
 
 struct wordFreq *HEAD = NULL;
 int wordCount = 0;
+int longestWord = 0;
 
 
 int main (int argc, char *argv[]) {
@@ -110,6 +112,11 @@ void validWord(char word[], int lengthOfWord) {
         if (word[lengthOfWord-1] == ','
                 || word[lengthOfWord-1] == '.') {
             word[lengthOfWord-1] = '\0';
+            lengthOfWord--;
+        }
+        if (lengthOfWord > longestWord) {
+            longestWord = lengthOfWord;
+            printf("-->%d<--\n", longestWord);
         }
 	wordCount += 1;
     }
@@ -185,9 +192,19 @@ void printLL() {
 
     traverse = HEAD->next;
     while (traverse != NULL) {
-	printf("'%s' appears %d times\n", traverse->word, traverse->freq);
+	printf("%*s | ", longestWord, traverse->word);
+        printOccurence(traverse->freq);
+        printf("(%d)\n", traverse->freq);
 	traverse = traverse->next;
     }
+}
+
+void printOccurence(int occurence) {
+    int i;
+    for (i = 0; i < occurence; i++) {
+        printf("=");
+    }
+    printf(" ");
 }
 
 void sortLL() {
