@@ -1,8 +1,7 @@
 /*
-Assignment 1 by Kyle Keoviva zdn158
-OS cs3733 with Korkmaz Spring 2019
+HEB Dev I Coding Challenge - histogram
+    by Kyle Keoviva
 
-Assignment 1 Independent Study Recitation extension
 */
 
 #include <stdio.h>
