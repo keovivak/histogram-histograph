@@ -14,7 +14,6 @@ OBJ = histogram.o
 app: ${OBJ}
 	${CFLAGS} -o histogram ${OBJ}
 
-
 clean:
 	rm ${OBJ}
 	rm histogram
