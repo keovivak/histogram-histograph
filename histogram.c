@@ -39,11 +39,12 @@ int main (int argc, char *argv[]) {
     int i, n, numberOfWordsInFile;
 
     if (argc < 2) {
-	fprintf(stderr, "Usage: ./wordcount <filename>\n");
+	fprintf(stderr, "Usage: ./histogram <filename>\n");
 	return (-1);
     }
 	
     countWordsInFile(argv[1]);
+    sortLL();
     
     return (0);
 }
@@ -143,7 +144,7 @@ int checkWordLL(char word[]) {
 
 void insertIntoLL(char word[], int lengthOfWord) {
     struct wordFreq *tmp = malloc(sizeof(struct wordFreq));
-    tmp->word = malloc(sizeof(char *) * lengthOfWord);
+    tmp->word = malloc(sizeof(char *) * (lengthOfWord*2));
     strcpy(tmp->word, word);
     tmp->freq = 1;
     tmp->next = NULL;
@@ -204,8 +205,16 @@ void sortLL() {
             index = current->next;
 
             while (index != NULL) {
-                if (cmp) {
-                    //
+                if (current->freq > index->freq) {
+                    printf("current val is bigger");
+                    strcpy(tmpWord, current->word);
+                    tmpValue = current->freq;
+
+                    strcpy(current->word, index->word);
+                    current->freq = index->freq;
+
+                    strcpy(index->word, tmpWord);
+                    index->freq = tmpValue;
                 }
                 index = index->next;
             }
