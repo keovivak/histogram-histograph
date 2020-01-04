@@ -9,9 +9,8 @@ Assignment 1 Independent Study Recitation extension
 #include <stdarg.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <errno.h>
-#include <sys/wait.h>
 #include <string.h>
+#include <ctype.h>
 
 
 struct wordFreq {
@@ -28,16 +27,15 @@ void validWord(char word[], int lengthOfWord);
 int checkWordLL(char word[]);
 void insertIntoLL(char word[], int lengthOfWord);
 void printLL();
+void printOccurence(int occurence);
 void sortLL();
 
 
 struct wordFreq *HEAD = NULL;
-int wordCount = 0;
+int longestWord = 0;
 
 
 int main (int argc, char *argv[]) {
-    int i, n, numberOfWordsInFile;
-
     if (argc < 2) {
 	fprintf(stderr, "Usage: ./histogram <filename>\n");
 	return (-1);
@@ -73,12 +71,7 @@ void countWordsInFile(char fileName[]) {
 	getWordFromLine(buffer, lenOfString);
     }
 
-    // Print output and close file
-    printf("Child process for %s: number of words is %d\n", fileName, wordCount);
     fclose(fileToRead);
-    printLL();
-
-    printf("\n\n");
 }
 
 void getWordFromLine(char line[], int lengthOfLine) {
@@ -107,12 +100,14 @@ void validWord(char word[], int lengthOfWord) {
     if (word[0] == '\0') {
 	return;
     } else {
-	printf("word is |%s| with a length of %d\n", word, lengthOfWord);
         if (word[lengthOfWord-1] == ','
                 || word[lengthOfWord-1] == '.') {
             word[lengthOfWord-1] = '\0';
+            lengthOfWord--;
         }
-	wordCount += 1;
+        if (lengthOfWord > longestWord) {
+            longestWord = lengthOfWord;
+        }
     }
 
     verifyWord = checkWordLL(word);
@@ -129,7 +124,6 @@ int checkWordLL(char word[]) {
     } else {
 	tmp = HEAD->next;
 	while (tmp != NULL) {
-	//printf("word %s vs current word = %s | %d\n", word, tmp->word, tmp->freq);
 	    if (strcmp(tmp->word, word) == 0) {
 		tmp->freq += 1;
 		//printf("WORD MATCHES\n");
@@ -186,9 +180,19 @@ void printLL() {
 
     traverse = HEAD->next;
     while (traverse != NULL) {
-	printf("'%s' appears %d times\n", traverse->word, traverse->freq);
+	printf("%*s | ", longestWord, traverse->word);
+        printOccurence(traverse->freq);
+        printf("(%d)\n", traverse->freq);
 	traverse = traverse->next;
     }
+}
+
+void printOccurence(int occurence) {
+    int i;
+    for (i = 0; i < occurence; i++) {
+        printf("=");
+    }
+    printf(" ");
 }
 
 void sortLL() {
