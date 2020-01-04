@@ -45,6 +45,7 @@ int main (int argc, char *argv[]) {
 	
     countWordsInFile(argv[1]);
     sortLL();
+    printLL();
     
     return (0);
 }
@@ -195,6 +196,7 @@ void sortLL() {
     struct wordFreq *index = NULL;
 
     char *tmpWord;
+    tmpWord = malloc(sizeof(char *));
     int tmpValue;
 
     current = HEAD->next;
@@ -205,8 +207,7 @@ void sortLL() {
             index = current->next;
 
             while (index != NULL) {
-                if (current->freq > index->freq) {
-                    printf("current val is bigger");
+                if (current->freq < index->freq) {
                     strcpy(tmpWord, current->word);
                     tmpValue = current->freq;
 
