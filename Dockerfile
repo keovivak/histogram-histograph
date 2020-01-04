@@ -1,6 +1,5 @@
-FROM gcc:4.9
+FROM gcc
 WORKDIR /app
 COPY . .
-#RUN gcc -o histogram histogram.c
 RUN make
 CMD ["./histogram", "input_files/input.txt"]
