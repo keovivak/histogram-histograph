@@ -32,13 +32,10 @@ void sortLL();
 
 
 struct wordFreq *HEAD = NULL;
-int wordCount = 0;
 int longestWord = 0;
 
 
 int main (int argc, char *argv[]) {
-    int i, n, numberOfWordsInFile;
-
     if (argc < 2) {
 	fprintf(stderr, "Usage: ./histogram <filename>\n");
 	return (-1);
@@ -74,12 +71,7 @@ void countWordsInFile(char fileName[]) {
 	getWordFromLine(buffer, lenOfString);
     }
 
-    // Print output and close file
-    printf("Child process for %s: number of words is %d\n", fileName, wordCount);
     fclose(fileToRead);
-    printLL();
-
-    printf("\n\n");
 }
 
 void getWordFromLine(char line[], int lengthOfLine) {
@@ -108,7 +100,6 @@ void validWord(char word[], int lengthOfWord) {
     if (word[0] == '\0') {
 	return;
     } else {
-	printf("word is |%s| with a length of %d\n", word, lengthOfWord);
         if (word[lengthOfWord-1] == ','
                 || word[lengthOfWord-1] == '.') {
             word[lengthOfWord-1] = '\0';
@@ -116,9 +107,7 @@ void validWord(char word[], int lengthOfWord) {
         }
         if (lengthOfWord > longestWord) {
             longestWord = lengthOfWord;
-            printf("-->%d<--\n", longestWord);
         }
-	wordCount += 1;
     }
 
     verifyWord = checkWordLL(word);
@@ -135,7 +124,6 @@ int checkWordLL(char word[]) {
     } else {
 	tmp = HEAD->next;
 	while (tmp != NULL) {
-	//printf("word %s vs current word = %s | %d\n", word, tmp->word, tmp->freq);
 	    if (strcmp(tmp->word, word) == 0) {
 		tmp->freq += 1;
 		//printf("WORD MATCHES\n");
