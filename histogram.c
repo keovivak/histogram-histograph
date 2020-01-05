@@ -4,6 +4,7 @@ HEB Dev I Coding Challenge - histogram
 
 */
 
+
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
