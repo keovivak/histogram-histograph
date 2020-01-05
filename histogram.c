@@ -10,25 +10,7 @@ HEB Dev I Coding Challenge - histogram
 #include <unistd.h>
 #include <string.h>
 #include <ctype.h>
-
-
-struct wordFreq {
-    char *word;
-    int freq;
-    struct wordFreq *next;
-    struct wordFreq *prev;
-};
-
-
-void countWordsInFile(char fileName[]);
-void getWordFromLine(char line[], int lengthOfLine);
-void validWord(char word[], int lengthOfWord);
-int checkWordLL(char word[]);
-void insertIntoLL(char word[], int lengthOfWord);
-void printLL();
-void printOccurence(int occurence);
-void sortLL();
-void outputContentsToFile();
+#include "histogram.h"
 
 
 struct wordFreq *HEAD = NULL;
@@ -44,6 +26,7 @@ int main (int argc, char *argv[]) {
     countWordsInFile(argv[1]);
     sortLL();
     printLL();
+    outputContentsToFile();
     
     return (0);
 }
@@ -229,25 +212,13 @@ void sortLL() {
 }
 
 void outputContentsToFile() {
-    FILE *fileTowrite;
+    FILE *fileToWrite;
     char buffer[BUFSIZ];
 
-    HEAD = malloc(sizeof(struct wordFreq));
-
-    // Opens file for read
     fileToWrite = fopen("output.txt", "w+");
+    printToFile(fileToWrite);
 
-    // Parses files to for spaces/tabs/newlines
-    while ((fgets(buffer, BUFSIZ, fileToRead)) != NULL) {
-	int lenOfString = strlen(buffer);
-        int i;
-        for (i = 0; i<lenOfString; i++) {
-            buffer[i] = tolower(buffer[i]);
-        }
-	getWordFromLine(buffer, lenOfString);
-    }
-
-    fclose(fileToRead);
+    fclose(fileToWrite);
 }
 
 void printToFile(FILE *pointerToFile) {
@@ -256,7 +227,7 @@ void printToFile(FILE *pointerToFile) {
     traverse = HEAD->next;
     while (traverse != NULL) {
 	fprintf(pointerToFile, "%*s | ", longestWord, traverse->word);
-        printOccurenceToFile(traverse->freq);
+        printOccurenceToFile(traverse->freq, pointerToFile);
         fprintf(pointerToFile, "(%d)\n", traverse->freq);
 	traverse = traverse->next;
     }
