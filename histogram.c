@@ -28,6 +28,7 @@ void insertIntoLL(char word[], int lengthOfWord);
 void printLL();
 void printOccurence(int occurence);
 void sortLL();
+void outputContentsToFile();
 
 
 struct wordFreq *HEAD = NULL;
@@ -225,5 +226,47 @@ void sortLL() {
             current = current->next;
         }
     }
+}
+
+void outputContentsToFile() {
+    FILE *fileTowrite;
+    char buffer[BUFSIZ];
+
+    HEAD = malloc(sizeof(struct wordFreq));
+
+    // Opens file for read
+    fileToWrite = fopen("output.txt", "w+");
+
+    // Parses files to for spaces/tabs/newlines
+    while ((fgets(buffer, BUFSIZ, fileToRead)) != NULL) {
+	int lenOfString = strlen(buffer);
+        int i;
+        for (i = 0; i<lenOfString; i++) {
+            buffer[i] = tolower(buffer[i]);
+        }
+	getWordFromLine(buffer, lenOfString);
+    }
+
+    fclose(fileToRead);
+}
+
+void printToFile(FILE *pointerToFile) {
+    struct wordFreq *traverse;
+
+    traverse = HEAD->next;
+    while (traverse != NULL) {
+	fprintf(pointerToFile, "%*s | ", longestWord, traverse->word);
+        printOccurenceToFile(traverse->freq);
+        fprintf(pointerToFile, "(%d)\n", traverse->freq);
+	traverse = traverse->next;
+    }
+}
+
+void printOccurenceToFile(int occurence, FILE *pointerToFile) {
+    int i;
+    for (i = 0; i < occurence; i++) {
+        fprintf(pointerToFile, "=");
+    }
+    fprintf(pointerToFile, " ");
 }
 
